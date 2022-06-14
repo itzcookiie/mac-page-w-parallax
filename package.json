@@ -1,0 +1,25 @@
+{
+  "name": "mac-page-w-parallax",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "source": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/itzcookiie/mac-page-w-parallax.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/itzcookiie/mac-page-w-parallax/issues"
+  },
+  "homepage": "https://github.com/itzcookiie/mac-page-w-parallax#readme",
+  "devDependencies": {
+    "parcel": "^2.6.0"
+  }
+}
