@@ -4,23 +4,23 @@ const wheelScrollDistance = 100,
 const heroText = {
         element: document.querySelector('.hero__text'),
         initialScale: 28,
-        change: function() {
-            return this.initialScale - (8 * (scrollY / innerHeight));
+        changeScaleBy: 8,
+        change: function(scrollDistance) {
+            return this.initialScale - (this.changeScaleBy * (scrollDistance / innerHeight));
         },
-        transform: function() {
-            if (this.initialScale <= 25) return;
-            this.element.style.transform = `translate(-50%, -50%) scale(${this.change()})`
+        transform: function(scrollDistance) {
+            this.element.style.transform = `translate(-50%, -50%) scale(${this.change(scrollDistance)})`
         }
     },
     heroImg = {
         element: document.querySelector('.hero__img'),
         initialScale: 1.2,
-        change: function() {
-            return this.initialScale + (0.2 * (scrollY / innerHeight));
+        changeScaleBy: 0.2,
+        change: function(scrollDistance) {
+            return this.initialScale + (this.changeScaleBy * (scrollDistance / innerHeight));
         },
-        transform: function() {
-            if (this.initialScale >= 1.25) return;
-            this.element.style.transform = `translate(-50%, -50%) scale(${this.change()})`
+        transform: function(scrollDistance) {
+            this.element.style.transform = `translate(-50%, -50%) scale(${this.change(scrollDistance)})`
         }
     },
     parallaxSection = {
@@ -31,11 +31,11 @@ const heroText = {
         endPoint: function() {
             return this.element.offsetHeight;
         },
-        change: function() {
-            return this.initialBrightness + 1 * (scrollY / this.startPoint)
+        change: function(scrollDistance) {
+            return this.initialBrightness + 1 * (scrollDistance / this.startPoint)
         },
-        transform: function() {
-            this.element.style.filter = `brightness(${this.change()})`
+        transform: function(scrollDistance) {
+            this.element.style.filter = `brightness(${this.change(scrollDistance)})`
         }
     },
     parallaxTextList = {
@@ -49,9 +49,13 @@ let lastScrollY = 0;
 
 window.addEventListener('scroll', e => {
     if (scrollY <= heroSection.offsetHeight) {
-        heroText.transform();
-        heroImg.transform();
-        parallaxSection.transform();
+        heroText.transform(scrollY);
+        heroImg.transform(scrollY);
+        parallaxSection.transform(scrollY);
+    } else {
+        heroText.transform(heroSection.offsetHeight);
+        heroImg.transform(heroSection.offsetHeight);
+        parallaxSection.transform(heroSection.offsetHeight);
     }
 
     lastScrollY = scrollY;
