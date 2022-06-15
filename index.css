@@ -1,3 +1,8 @@
+:root {
+    --wheel-scroll-distance: 100px;
+    --num-scrolls: 6;
+}
+
 *, *::before, *::after {
     box-sizing: border-box;
     padding: 0;
@@ -44,10 +49,8 @@ body {
 }
 
 .parallax {
-    height: 200%;
+    height: calc(100% + var(--wheel-scroll-distance) * var(--num-scrolls));
     width: 100%;
-    display: flex;
-    align-items: center;
     background-image: url("./assets/headphones-threads.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
@@ -55,21 +58,52 @@ body {
     background-position: center center;
 }
 
-.parallax__text-list {
-    height: 50%;
+.parallax-container {
+    height: 100vh;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    /*display: flex;*/
+    /*align-items: center;*/
+    position: sticky;
+    top: 0;
+}
+
+.parallax__text-list {
+    /*height: 50%;*/
+    width: 100%;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: space-between;*/
+    /*align-items: center;*/
 }
 
 .parallax__text-container {
     max-width: 800px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
     color: white;
     font-size: 4rem;
     text-align: center;
     list-style-type: none;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+.parallax__text-container:nth-child(1) {
+    opacity: 1;
+}
+
+.parallax__text-container:nth-child(2) {
+    top: calc(50% + var(--wheel-scroll-distance) * 2)
+}
+
+.parallax__text-container:nth-child(3) {
+    top: calc(50% + var(--wheel-scroll-distance) * 4)
+}
+
+.parallax__text-container:nth-child(4) {
+    top: calc(50% + var(--wheel-scroll-distance) * 6)
 }
 
 .parallax__btn {
